@@ -1,0 +1,17 @@
+    {% extends 'base/main.html' %}
+    {% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>OwnlyLogin</title>
+    <h2>Admin-Login</h2>
+</head>
+<body>
+<form method="POST">
+  {% csrf_token%}
+  {{form.as_p}}
+  <input type="submit" value="Login">
+</form>
+
+</body>
+
+    {% endblock content %}

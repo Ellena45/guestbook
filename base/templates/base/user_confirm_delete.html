@@ -1,0 +1,16 @@
+    {% extends 'base/main.html' %}
+    {% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="POST">
+    {% csrf_token %}
+    <p> Sind Sie sicher das Sie diesen Besucher löschen wollen? "{{user}}"  </p>
+    <input type="submit" value="Löschen">
+</form>
+<a href="{% url 'base:users' %}">Zurück</a>
+</body>
+    {% endblock content %}

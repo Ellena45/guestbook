@@ -1,0 +1,59 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Ownly</title>
+</head>
+<body>
+
+
+<h3>Besucher Formular</h3>
+
+
+<form method="GET">
+
+    <input type="text" name="Suchfeld" value="{{search_input}}">
+
+    <input type="submit" value="Suchen">
+</form>
+
+
+{% if users %}
+<table>
+    <th>
+        <tr>
+            <td>Vorname</td>
+            <td>Nachname</td>
+        </tr>
+    </th>
+
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <!--<td><a href="{% url 'base:user' user.id %}">Anzeigen</a></td> !-->
+        <td><a href="{% url 'base:user-update' user.id %}">Bearbeiten</a></td>
+        <td><a href="{% url 'base:user-delete' user.id %}">Löschen</a></td>
+        <td>
+            <form method="post" action="{% url 'base:user-logout' user.id %}">{% csrf_token %}
+                <button type="submit" value="LOGOUT">LOG</button>
+            </form>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% else %}
+<h3> Kein Besucher auf der Liste </h3>
+{% endif %}
+
+<a href="{% url 'base:users' %}"> Zurück </a>
+</body>
+</html>
+{% endblock content %}
