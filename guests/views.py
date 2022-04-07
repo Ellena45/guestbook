@@ -4,27 +4,32 @@ from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import User
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, \
+    DeleteView  # python genercis sind python eigen /Klassenbasierte Ansichten richten automatisch alles von A bis Z ein.
+# Es muss nur angeben werden, für welches Modell DetailView erstellt werden soll, dann versucht dasklassenbasierte DetailView automatisch diese zuerstellen
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
-#from .forms import UserForm
+# from .forms import UserForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
+import csv
+from django.http import HttpResponse
 
 
 
-class CustomLoginView(LoginView):
+
+class CustomLoginView(LoginView):  # Admin Login welches auf die html Vorlage login zugeordnet wird
     template_name = 'base/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
 
-    def get_success_url(self):
+    def get_success_url(self):  #
         return reverse_lazy('base:users')
 
 
-class UserList(LoginRequiredMixin, ListView):
+class UserList(LoginRequiredMixin, ListView):  # lstet die User liste aus meiner DB auf
     model = User
-    template_name = 'base/user_list.html'
+    template_name = 'base/start_page.html'
 
 
 """           
@@ -42,7 +47,7 @@ class UserDetail(LoginRequiredMixin, DetailView):
 class UserCreate(LoginRequiredMixin, CreateView):
     model = User
     form_class = UserForm  # für bootstrap eingebunden das forms.py
-    #fields = ['firstname', 'lastname', 'companyname', 'email']    # alternative ['name','companyname'] / __all__ zeigt alle Felder
+    # fields = ['firstname', 'lastname', 'companyname', 'email']    # alternative ['name','companyname'] / __all__ zeigt alle Felder
     success_url = reverse_lazy('base:users')
 
     def form_valid(self, form):
@@ -65,7 +70,7 @@ class DeleteView(LoginRequiredMixin, DeleteView):
 
 class UserLeave(LoginRequiredMixin, ListView):
     model = User
-    template_name = 'base/user_leave.html'
+    template_name = 'base/user_details.html'
     fields = ['lastname', 'companyname']  # alternative ['name','companyname'] / __all__ zeigt alle Felder
     success_url = reverse_lazy('base:users')
     context_object_name = 'users'
@@ -96,10 +101,59 @@ class UserLogout(LoginRequiredMixin, DetailView):
 
         return redirect('base:user-leave')
 
+
+class Impressum(LoginRequiredMixin, ListView):
+    model = User
+    template_name = 'base/user_impressum.html'
+
+
+
+def csv_database_write(request):
+
+    # entnimmt alle Daten aus dem Model User
+    users = User.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="csv_database_write.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['first_name', 'last_name'])
+
+    for user in users:
+        writer.writerow([user.first_name, user.last_name])
+
+    return response
+
+
+
 """
- 
+ class ExportCsvMixin:
+    def export_as_csv(self, request, queryset):
+        meta = self.model.meta
+        field_names = [field.name for field in meta.fields]
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
+        writer = csv.writer(response)
+        writer.writerow(field_names)
+        for obj in queryset:
+            row = writer.writerow([getattr(obj, field) for field in field_names])
+
+        return response
+
+    export_as_csv.short_description = "Export Select"
 
 
+response = HttpResponse(content_type='text/csv')
+    
+        writer = csv.writer(response)
+        writer.writerow(['firstname', 'lastname'])
+        for user in User.objects.all().values_list('firstname','lastname'):
+            writer.writerow(user)
+        response['Content-Disposition'] = 'attachment; filename="user.csv.format"'
+    
+        return response
+        
+        
 
     def logout(request):
         context = {}
@@ -134,7 +188,6 @@ class UserLogout(LoginRequiredMixin, DetailView):
 
         return context
 """
-
 
 """
 class UserLogout(DetailView):

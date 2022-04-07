@@ -1,5 +1,5 @@
-    {% extends 'base/main.html' %}
-    {% block content %}
+{% extends 'base/main.html' %}
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Ownly</title>
@@ -12,10 +12,10 @@
 </div>
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-6" style="float:none;margin:auto;"> <!-- setzt den Bereich der Eingabefelder automatisch in den Container central -->
         <form method="POST" action="" class="formular">
-        {% csrf_token %}
-        {{form.as_p}}
+            {% csrf_token %}
+            {{form.as_p}}
             <div class="button-wrapper">
                 <input type="submit" value="Login" class="button button-primary push-right-36">
                 <a href="{% url 'base:users' %}" class="button button-secondary"> Zurück </a>
@@ -28,4 +28,4 @@
 </form>
 
 </body>
-    {% endblock content %}
+{% endblock content %}

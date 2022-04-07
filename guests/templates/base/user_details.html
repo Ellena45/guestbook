@@ -1,0 +1,85 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Ownly</title>
+</head>
+<body>
+
+<div class="row section_margin">
+    <div class="col-12">
+        <h3>Besucher Liste</h3>
+    </div>
+</div>
+
+<div class="row section_margin">
+    <div class="col-12">
+        <form method="GET" class="search_area">
+
+            <input type="text" name="Suchfeld" value="{{search_input}}">
+
+            <input type="submit" value="Suchen">
+        </form>
+    </div>
+</div>
+
+
+<div class="formular">
+
+    {% if users %}
+    <table class="rounded">
+        <thead>
+        <tr>
+            <td>Vorname</td>
+            <td>Nachname</td>
+            <td>Firma</td>
+            <td>Aktionen</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% load static %}
+        {% for user in users %}
+        <tr>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.companyname }}</td>
+            <!--<td><a href="{% url 'base:user' user.id %}">Anzeigen</a></td> !-->
+            <td class="action-column"><a href="{% url 'base:user-update' user.id %}">
+                <img src="{% static 'edit.svg' %}" alt="My image" class="icon">
+            </a>
+                <a href="{% url 'base:user-delete' user.id %}">
+                    <img src="{% static 'delete.svg' %}" alt="My image" class="icon">
+                </a>
+
+                <form method="post" action="{% url 'base:user-logout' user.id %}">{% csrf_token %}
+                    <a href="{% url 'base:user-logout' user.id %}">
+                        <img src="{% static 'logout.svg' %}" alt="My image" class="icon">
+                    </a>
+                </form>
+            </td>
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    {% else %}
+    <h3> Kein Besucher auf der Liste </h3>
+    {% endif %}
+    <div class="row section_margin">
+        <div class="col-12">
+            <div class="button-wrapper">
+                <a href="{% url 'base:users' %}" class="button button-secondary button button-wra"> Zurück </a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+{% endblock content %}

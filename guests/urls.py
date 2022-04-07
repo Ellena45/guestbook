@@ -1,7 +1,7 @@
 
 from . import views
 from django.urls import path
-from .views import UserList, UserDetail, UserCreate, UserUpdate, DeleteView, CustomLoginView, UserLeave, UserLogout
+from .views import UserList, UserDetail, UserCreate, UserUpdate, DeleteView, CustomLoginView, UserLeave, UserLogout, Impressum
 from django.contrib.auth.views import LogoutView
 
 app_name = 'base'
@@ -15,5 +15,6 @@ urlpatterns = [
     path('user-delete/<int:pk>/', DeleteView.as_view(), name='user-delete'),
     path('user-leave/', UserLeave.as_view(), name='user-leave'),
     path('user-logout/<int:pk>/', UserLogout.logout, name='user-logout'),
-
+    path('user-impressum/', Impressum.as_view(), name='user-impressum'),
+    path('export/csv-database-write/', views.csv_database_write, name='csv_database_write'),
 ]

@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>OwnlyLogin</title>
+
+
+
     <h2>Admin-Login</h2>
 </head>
 <body>
+<div class="moveright">
+    <div class="col-12">
 <form method="POST">
   {% csrf_token%}
+
   {{form.as_p}}
   <input type="submit" value="Login">
-</form>
 
+</form>
+</div>
+</div>
 </body>
 
     {% endblock content %}

@@ -7,6 +7,7 @@ class User(models.Model):
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
     companyname = models.CharField(max_length=200, null=True)
+    consultant = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     leave = models.DateTimeField(blank=True, null=True)

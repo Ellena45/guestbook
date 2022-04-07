@@ -1,0 +1,41 @@
+{% extends 'base/main.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Impressum</title>
+</head>
+<body>
+<div class="row section_margin">
+    <div class="col-12">
+        <div class="row section_margin">
+            <div class="col-12">
+
+                <h3 align="left">Impressum</h3>
+
+                <hr>
+
+                <p id="moveleft">Inh. Verantwortl. gem. § 55 Abs. 2 RStV: Dr. Nicholas Ziegert</br>
+                    W&Z FinTech GmbH</br>
+                    Schauenburgerstraße 6</br>
+                    20095 Hamburg</br>
+                    Tel.: +49 40 209 324 170</br>
+                    Fax.: +49 40 18050711</br>
+                    contact@ownly.de</br>
+                    Registergericht: Handelsregister Hamburg HR B 137731</br>
+                    Geschäftsführer: Dr. Nicholas Ziegert</br>
+                    USt-IdNr. DE301415777</br>
+                </p>
+
+            </div>
+        </div>
+        <hr>
+         <div class="row section_margin">
+        <div class="col-12">
+            <div class="button-wrapper">
+                <a href="{% url 'base:users' %}" class="button button-secondary button button-wra"> Zurück </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}
