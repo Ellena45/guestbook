@@ -45,7 +45,7 @@
             <td>{{ user.firstname }}</td>
             <td>{{ user.lastname }}</td>
             <td>{{ user.companyname }}</td>
-            <!--<td><a href="{% url 'base:user' user.id %}">Anzeigen</a></td> !-->
+            <!--<td><a href="{% url 'guests:user' user.id %}">Anzeigen</a></td> !-->
             <td class="action-column"><a href="{% url 'base:user-update' user.id %}">
                 <img src="{% static 'edit.svg' %}" alt="My image" class="icon">
             </a>
