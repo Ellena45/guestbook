@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('companyname', models.CharField(max_length=200, null=True)),
+                ('consultant', models.CharField(default=True, max_length=100)),
                 ('email', models.CharField(default=True, max_length=100)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('leave', models.DateTimeField(null=True)),

@@ -1,4 +1,4 @@
-{% extends 'base/main.html' %}
+{% extends 'guests/main.html' %}
 {% block content %}
 <head>
     <meta charset="UTF-8">
@@ -18,7 +18,7 @@
             {{form.as_p}}
             <div class="button-wrapper">
                 <input type="submit" value="Login" class="button button-primary push-right-36">
-                <a href="{% url 'base:users' %}" class="button button-secondary"> Zurück </a>
+                <a href="{% url 'guests:users' %}" class="button button-secondary"> Zurück </a>
             </div>
 
     </div>

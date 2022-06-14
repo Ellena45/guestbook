@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('base', '0004_alter_user_leave'),
+        ('guests', '0004_alter_user_leave'),
     ]
 
     operations = [

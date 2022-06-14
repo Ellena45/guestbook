@@ -1,12 +1,12 @@
-{% extends 'base/main.html' %}
+{% extends 'guests/main.html' %}
 {% block content %}
 
 <div class="admin">
     {% if request.user.is_authenticated %}
 
-    <a href="{% url 'base:logout' %}" class="admin-log">Admin-Logout</a>
+    <a href="{% url 'guests:logout' %}" class="admin-log">Admin-Logout</a>
     {% else %}
-    <a href="{% url 'base:login' %}">Admin-Login</a>
+    <a href="{% url 'guests:login' %}">Admin-Login</a>
     {% endif %}
 
 </div>
@@ -26,11 +26,11 @@
 <div class="row section_margin">
     <div class="col-12">
         <div class="button-wrapper">
-            <a href="{% url 'base:user-leave' %}">
+            <a href="{% url 'guests:user-leave' %}">
                 <button type="button" class="button button-secondary push-right-36">Besucherliste</button>
             </a>
 
-            <a href="{% url 'base:user-create' %}">
+            <a href="{% url 'guests:user-create' %}">
                 <button type="button" class="button button-primary">Hinzufügen</button>
                 <!-- Logout auf der Startseite oben-->
             </a>
@@ -42,7 +42,7 @@
 <div class="row section_margin">
     <div class="col-12">
         <hr>
-        <a href="{% url 'base:user-impressum' %}" class="formular ">Impressum</a>
+        <a href="{% url 'guests:user-impressum' %}" class="formular ">Impressum</a>
     </div>
 </div>
 </div>

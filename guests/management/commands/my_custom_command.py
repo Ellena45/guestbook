@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import datetime
 import sqlite3
 from datetime import datetime, timedelta
-from base.models import User
+from guests.models import User
 
 
 class Command(BaseCommand):

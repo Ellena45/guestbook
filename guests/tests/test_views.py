@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from django.contrib.auth.models import User
 
-from base.views import UserDetail
+from guests.views import UserDetail
 
 
 class TestUserList(TestCase):

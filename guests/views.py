@@ -19,17 +19,17 @@ from django.http import HttpResponse
 
 
 class CustomLoginView(LoginView):  # Admin Login welches auf die html Vorlage login zugeordnet wird
-    template_name = 'base/login.html'
+    template_name = 'guests/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
 
     def get_success_url(self):  #
-        return reverse_lazy('base:users')
+        return reverse_lazy('guests:users')
 
 
 class UserList(LoginRequiredMixin, ListView):  # lstet die User liste aus meiner DB auf
     model = User
-    template_name = 'base/start_page.html'
+    template_name = 'guests/start_page.html'
 
 
 """           
@@ -41,14 +41,14 @@ class UserDetail(LoginRequiredMixin, DetailView):
     model = User
     context_object_firstname = 'user'
     context_object_lastname = 'user'
-    template_name = 'base/user.html'
+    template_name = 'guests/user.html'
 
 
 class UserCreate(LoginRequiredMixin, CreateView):
     model = User
     form_class = UserForm  # für bootstrap eingebunden das forms.py
     # fields = ['firstname', 'lastname', 'companyname', 'email']    # alternative ['name','companyname'] / __all__ zeigt alle Felder
-    success_url = reverse_lazy('base:users')
+    success_url = reverse_lazy('guests:users')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -58,21 +58,21 @@ class UserCreate(LoginRequiredMixin, CreateView):
 class UserUpdate(LoginRequiredMixin, UpdateView):
     model = User
     fields = ['firstname', 'lastname', 'companyname', 'email']
-    success_url = reverse_lazy('base:users')
+    success_url = reverse_lazy('guests:users')
 
 
 class DeleteView(LoginRequiredMixin, DeleteView):
     model = User
     context_object_firstname = 'user'
     context_object_lastname = 'user'
-    success_url = reverse_lazy('base:users')
+    success_url = reverse_lazy('guests:users')
 
 
 class UserLeave(LoginRequiredMixin, ListView):
     model = User
-    template_name = 'base/user_details.html'
+    template_name = 'guests/user_details.html'
     fields = ['lastname', 'companyname']  # alternative ['name','companyname'] / __all__ zeigt alle Felder
-    success_url = reverse_lazy('base:users')
+    success_url = reverse_lazy('guests:users')
     context_object_name = 'users'
 
     def get_context_data(self, **kwargs):
@@ -99,12 +99,12 @@ class UserLogout(LoginRequiredMixin, DetailView):
             user.leave = datetime.now()
             user.save()
 
-        return redirect('base:user-leave')
+        return redirect('guests:user-leave')
 
 
 class Impressum(LoginRequiredMixin, ListView):
     model = User
-    template_name = 'base/user_impressum.html'
+    template_name = 'guests/user_impressum.html'
 
 
 

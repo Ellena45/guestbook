@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base.apps.BaseConfig',
-    'crispy_forms',
+    'guests',
 
 ]
 
@@ -118,7 +117,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = 'base:login'
+LOGIN_URL = 'guests:login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

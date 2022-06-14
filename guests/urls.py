@@ -4,10 +4,10 @@ from django.urls import path
 from .views import UserList, UserDetail, UserCreate, UserUpdate, DeleteView, CustomLoginView, UserLeave, UserLogout, Impressum
 from django.contrib.auth.views import LogoutView
 
-app_name = 'base'
+app_name = 'guests'
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(next_page='base:login'), name='logout'),
+    path('logout/', LogoutView.as_view(next_page='guests:login'), name='logout'),
     path('', UserList.as_view(), name='users'),
     path('user/<int:pk>/', UserDetail.as_view(), name='user'),
     path('user-create/', UserCreate.as_view(), name='user-create'),
